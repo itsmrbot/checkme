@@ -22,7 +22,7 @@ No pip packages needed: just Python 3 and tkinter.
 ## Run it
 
 ```bash
-git clone https://github.com/<your-username>/checkme.git
+git clone https://github.com/itsmrbot/checkme.git
 cd checkme
 python main.py
 ```
