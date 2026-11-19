@@ -1,85 +1,70 @@
-# ♟️ CheckMe — Python Chess Engine & GUI
+# checkme ♟
 
-A complete, modular chess application built in Python featuring a custom game engine, AI search algorithms, opening book support, move notation parsing, and an interactive user interface with smooth piece animations.
+A free chess **practice** app for one player, in pure Python. Think "chess.com free version", but built
+for learning: **openings, middlegames and endgames**, against a computer with **9 difficulty levels**.
 
-## ✨ Features
+No pip packages needed: just Python 3 and tkinter.
 
-* **Core Chess Engine (`engine.py`, `game.py`):** Full implementation of standard chess rules, move validation, check/checkmate detection, and game state management.
+## Features
 
-* **AI Opponent (`search.py`, `openings.py`):** Intelligent move calculation powered by search algorithms (e.g., Minimax / Alpha-Beta pruning) paired with an opening book for strong early-game play.
+- **9 levels**: Rookie, Casual, Novice, Improver, Club player, Advanced, Strong, Expert, Master
+- **Practice areas**
+  - **Openings**: 13 lines to learn (6 as White, 7 as Black) with comments on every move, ideas and plans. You earn up to 3 stars.
+  - **Middlegames**: start from a position after the opening and play it out
+  - **Endgames**: 5 drills (K+Q vs K, K+R vs K, two bishops, K+P vs K, Lucena)
+  - **Play**: a normal game from the start position
+- **Assist / no Assist**: with Assist you get hints, an evaluation bar, move-quality badges (best, good, inaccuracy, mistake, blunder) and takeback. Without it, you are on your own.
+- **Time formats**: No clock, **1 min**, **3 min**, **10 min**
+- **Settings**: **premove**, board theme (green, brown, blue), animation speed, coordinates, move dots. Saved to `~/.checkme_settings.json`
+- Smooth animations: sliding pieces, capture ripples, check glow, hint arrows
+- Review the game with the arrow keys, flip the board, resign, rematch
 
-* **Algebraic Notation (`notation.py`):** Support for parsing and generating standard chess notation (SAN / FEN / UCI) for logging games and loading board states.
-
-* **Interactive UI & Animations (`ui.py`, `animation.py`, `app.py`):** Clean graphical interface with smooth piece movement transitions and visual board feedback.
-
-* **Comprehensive Test Suite (`test_*.py`):** Unit tests covering the engine, search logic, notation parser, openings, and animations to ensure reliability.
-
-## 📁 Project Structure
-
-```text
-├── LICENSE               # Project license
-├── checkme.py            # Primary entry point to launch the application
-├── app.py                # Application controller and main loop
-├── engine.py             # Core chess rules, board representation, and move generation
-├── game.py               # Game state, turn management, and win/draw conditions
-├── search.py             # AI evaluation and search tree algorithms
-├── openings.py           # Opening book database and lookup logic
-├── notation.py           # Chess notation parsing and formatting (SAN/FEN)
-├── ui.py                 # Graphical user interface rendering and event handling
-├── animation.py          # Smooth visual transitions for piece movements
-└── test_*.py             # Unit tests for engine, game, search, openings, notation, and animations
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-* Python 3.8 or higher
-* Required dependencies (e.g., `pygame` or other GUI libraries—)
-
-### Installation
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/itmrbot/checkme.git
-   cd checkme
-   ```
-
-2. **Install dependencies:**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-
-### Running the Application
-
-Launch the game by running `checkme.py`:
+## Run it
 
 ```bash
-python checkme.py
+git clone https://github.com/<your-username>/checkme.git
+cd checkme
+python main.py
 ```
 
-## 🧪 Running Tests
+tkinter comes with Python on Windows and macOS. On Linux: `sudo apt install python3-tk`.
 
-This project includes a full suite of unit tests for its core modules. You can run all tests at once using `pytest` or Python's built-in `unittest` module:
+## Controls
+
+| Action | How |
+| --- | --- |
+| Move | click a piece, then a square |
+| Premove | while the computer thinks, click a piece and a square (premoves promote to a queen) |
+| Cancel selection / premove | right click or `Esc` |
+| Review moves | `←` `→`, `Home`, `End`, or click a move |
+
+## Tests
 
 ```bash
-# Using unittest
-python -m unittest discover
-
-# Or using pytest
-pytest
+python -m unittest
 ```
 
-## 🛠️ Roadmap / Future Improvements
+The engine is checked with standard perft counts. `test_app.py` runs the whole window with
+`fake_tkinter.py`, so it needs no screen.
 
-* 🤖 Add configurable AI difficulty levels / search depth
-* 📂 Support PGN game export and import
-* 🎵 Add sound effects for moves, captures, and checks
-* 👥 Implement multiplayer over network
+## Files
 
-## 📄 License
+| File | What it does |
+| --- | --- |
+| `main.py` | starts the app |
+| `app.py` | the window: screens, input, animation |
+| `ui.py`, `animation.py` | small drawing toolkit and animation helpers |
+| `engine.py` | chess rules |
+| `notation.py` | SAN notation both ways |
+| `search.py` | the computer player and the 9 levels |
+| `openings.py` | opening lines, comments, endgame drills |
+| `game.py` | game state, clocks, trainer, move grading |
 
-This project is licensed under the terms of the MIT LICENSE file included in this repository.
+## Limits
+
+No sound, no drag and drop (click to move), games are not saved, each opening has one main line,
+and there are 5 endgame drills.
+
+## License
+
+MIT, see `LICENSE`.
